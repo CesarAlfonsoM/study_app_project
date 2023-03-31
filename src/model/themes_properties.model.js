@@ -1,31 +1,26 @@
 const { DataTypes, INTEGER } = require('sequelize');
 const { sequelize } = require('../connection');
 
-const ThemesModel = sequelize.define('Themes', {
+const ThemesPropertiesModel = sequelize.define('ThemesProperties', {
     id: {
         type: DataTypes.INTEGER,
         allowNull: false, primaryKey: true, autoIncrement: true,
     },
-    create_date: {
-        type: DataTypes.DATE, allowNull: true
-    },
-    name: {
-        type: DataTypes.STRING, allowNull: true
-    },
-    description: {
-        type: DataTypes.STRING, allowNull: true
-    },
-    keywords: {
-        type: DataTypes.STRING, allowNull: true
-    },
-    owner_user_id: {
+    theme_id: {
         type: DataTypes.INTEGER, allowNull: true
+    },
+    property_name: {
+        type: DataTypes.STRING, allowNull: true
+    },
+    property_value: {
+        type: DataTypes.STRING, allowNull: true
     }
 
 }, {
-    tableName: 'themes',
+    tableName: 'themes_properties',
     timestamps: false
 });
 module.exports = {
-    ThemesModel
+    ThemesPropertiesModel
 }; 
+ 

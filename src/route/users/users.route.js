@@ -1,8 +1,9 @@
-const userController = require('../../controller/users/users.controller');
+const userController = require('../../controller/users/users.controller_copy');
 
-module.exports = function (app) {
+module.exports = function(app) {
+
     app.get("/users/list", userController.listar);
-    app.get("/user/:id", userController.consultarPorCodigo);
+    app.get("/user/:id", userController.busquedaPorCodigo);
     app.post("/users/update", userController.actualizar);
     app.delete("/users/delete/:id", userController.eliminar);
 }

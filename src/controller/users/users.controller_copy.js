@@ -1,22 +1,26 @@
 const { sequelize } = require("../../connection");
-const { ThemesModel } = require("../../model/themes.model");
-const ThemesService = require('../../service/themes.service');
+const { UserModel } = require("../../model/user.model");
+const UserService = require('../../service/users.service');
 
-///cuando se trata de listar es mejor usar SQL puro por cuestion de tiempo
 const listar = async function (req, res) {
-    console.log("listar temas");
+    ///async para que trabaje de manera asincrono 
+
+    console.log("listar usuarios");
+
     try {
-        const themes = await ThemesService.listar(req.query.filtro || '');
-        if (themes) {
+        const users = await UserService.listar(req.query.filtro || "");
+
+        if (users) {
             // en users[0] se encuentra el listado de lo que se recupera desde el sql
             res.json({
                 success: true,
-                temas: themes
+                usuarios: users
             });
+
         } else {
             res.json({
                 success: true,
-                temas: []
+                usuarios: []
             });
         }
     } catch (error) {
@@ -29,18 +33,21 @@ const listar = async function (req, res) {
 };
 
 const consultarPorCodigo = async function (req, res) {
-    console.log("consultar 1 tema por codigo");
+
+    console.log("consultar 1 usuario por codigo");
+
     try {
-        const themesModelResult = await ThemesService.consultarPorCodigo(req.params.id);
-        if (themesModelResult) {
+
+        const userModelResult = await UserService.busquedaPorCodigo(req.params.id);
+        if (userModelResult) {
             res.json({
                 success: true,
-                temas: themesModelResult
+                usuario: userModelResult
             });
         } else {
             res.json({
                 success: true,
-                temas: null
+                usuario: null
             });
         }
     } catch (error) {
@@ -53,21 +60,23 @@ const consultarPorCodigo = async function (req, res) {
 };
 
 const actualizar = async function (req, res) {
-    console.log("actualizar temas");
-    let temaRetorno = null; //guarda el tema que se va incluir o editar;
-    try {
-        let temaRetorno = await ThemesService.actualizar(
-            req.body.id,
-            req.body.create_date,
-            req.body.name,
-            req.body.description,
-            req.body.keywords,
-            req.body.owner_user_id
-        );
+    console.log("actualizar usuarios");
+    let usuarioRetorno = null; //guarda el usuario que se va incluir o editar;
+    //const data = req.body; //se obtiene los datos del cuerpo de la peticion
+    //const id = req.body.id;
 
+    try {
+        usuarioRetorno = await UserService.actualizar(
+            req.body.id,
+            req.body.name,
+            req.body.last_name,
+            req.body.avatar,
+            req.body.email,
+            req.body.password,
+            req.body.deleted);
         res.json({
             success: true,
-            themes: temaRetorno
+            user: usuarioRetorno
         });
     } catch (error) {
         console.log(error);
@@ -79,16 +88,16 @@ const actualizar = async function (req, res) {
 };
 
 const eliminar = async function (req, res) {
-    console.log("eliminar temas");
-   
+    console.log("eliminar usuarios");
+  
     try {
-        const temaRetorno =  await ThemesService.eliminar(req.params.id);
+        const usuarioRetorno = await UserService.eliminar(req.params.id);
         res.json({
-            success: temaRetorno,
+            success: usuarioRetorno,
         });
 
     } catch (error) {
-        console.log(error);
+         console.log(error);
         res.json({
             success: false,
             error: error.message
@@ -96,7 +105,7 @@ const eliminar = async function (req, res) {
     }
 };
 
-module.exports = {
-    listar, consultarPorCodigo, actualizar, eliminar
-};
 
+module.exports = {
+    listar, busquedaPorCodigo: consultarPorCodigo, actualizar, eliminar
+};

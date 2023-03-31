@@ -9,7 +9,7 @@ const listar = async function (req, res) {
         const users = await UserService.listar(req.query.filtro || '');
 
         console.log("users", users);
-        if (users && users[0]) {
+        if (users) {
             res.json({
                 success: true,
                 usuarios: users
