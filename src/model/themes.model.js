@@ -29,3 +29,4 @@ const ThemesModel = sequelize.define('Themes', {
 module.exports = {
     ThemesModel
 }; 
+

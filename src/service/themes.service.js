@@ -94,3 +94,4 @@ const eliminar = async function (id) {
 module.exports = {
     listar, consultarPorCodigo, actualizar, eliminar
 };
+

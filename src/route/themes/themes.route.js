@@ -6,4 +6,3 @@ module.exports = function(app) {
     app.post("/themes/update", themesController.actualizar);
     app.delete("/themes/delete/:id", themesController.eliminar);
 }
-
