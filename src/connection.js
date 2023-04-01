@@ -1,6 +1,6 @@
 const {Sequelize} = require("sequelize");
 
-const sequelize = new Sequelize("db_study_app", 'postgres', 'wiler', { //el wiler ahi seria mi contrasenha del postgre
+const sequelize = new Sequelize("db_study_app", 'postgres', 'admin', { //'admin' es mi contraseña del postgres.
     host : 'localhost',
     port : 5432,
     dialect : 'postgres'
