@@ -99,4 +99,3 @@ const eliminar = async function (req, res) {
 module.exports = {
     listar, consultarPorCodigo, actualizar, eliminar
 };
-
