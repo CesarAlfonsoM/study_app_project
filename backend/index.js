@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const app = express();
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({extended: true})); //Esto fue agregado el 31.03.23
 app.use(bodyParser.json());
 
 const userRoute = require("./src/route/users/users.route");
